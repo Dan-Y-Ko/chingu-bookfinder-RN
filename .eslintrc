@@ -1,0 +1,27 @@
+{
+  "root": true,
+  "extends": ["@react-native-community", "airbnb-typescript", "prettier"],
+  "rules": {
+    "@typescript-eslint/no-use-before-define": "off",
+    "react/style-prop-object": [
+      "error",
+      {
+        "allow": ["StatusBar"]
+      }
+    ],
+    "react/require-default-props": 0,
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ]
+  },
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "settings": {
+    "import/core-modules": ["@expo/vector-icons"]
+  }
+}
