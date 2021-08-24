@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import axios from "axios";
 import styled from "styled-components/native";
-import { FlatList, View } from "react-native";
+import { FlatList, View, Text } from "react-native";
 import { Searchbar } from "react-native-paper";
 
 import Book from "../components/Book";
+import useFetch from "../hooks/useFetch";
 
 const BookListViewContainer = styled(View)`
   margin-bottom: 70px;
@@ -15,23 +15,20 @@ const SearchBarStyled = styled(Searchbar)`
 `;
 
 const BookListScreen = () => {
-  const [books, setBooks] = useState<any>([]);
-  const [searchText, setsearchText] = useState("");
+  const [searchText, setSearchText] = useState("");
 
-  const fetchData = async () => {
-    const result = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchText}`
-    );
+  const { fetchData, response, loading, error } = useFetch();
 
-    setBooks(result.data.items);
+  const handleSearch = async () => {
+    await fetchData(`books/v1/volumes?q=${searchText}`);
   };
 
   const updateSearch = (text: string) => {
-    setsearchText(text);
+    setSearchText(text);
   };
 
   const renderBook = ({ item: { volumeInfo } }: any) => {
-    if (!volumeInfo.imageLinks) {
+    if (!volumeInfo.imageLinks || !volumeInfo.authors) {
       return null;
     }
 
@@ -51,13 +48,18 @@ const BookListScreen = () => {
         placeholder="Search book..."
         onChangeText={updateSearch}
         value={searchText}
-        onSubmitEditing={fetchData}
+        onSubmitEditing={handleSearch}
       />
-      <FlatList
-        data={books}
-        renderItem={renderBook}
-        keyExtractor={(item) => item.id}
-      />
+      {loading && <Text>Loading....</Text>}
+      {/* {error && <Error />} */}
+
+      {!error && !loading && response && (
+        <FlatList
+          data={response}
+          renderItem={renderBook}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </BookListViewContainer>
   );
 };

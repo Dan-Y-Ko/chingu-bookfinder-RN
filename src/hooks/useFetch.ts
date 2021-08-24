@@ -5,12 +5,13 @@ import API from "../api/axiosConfig";
 const useFetch = () => {
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async (url: string) => {
     try {
+      setLoading(true);
       const result = await API.get(url);
-      setResponse(result.data.results);
+      setResponse(result.data.items);
       setLoading(false);
     } catch (e) {
       setError(e);
