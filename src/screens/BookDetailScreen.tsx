@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { View, Image, ScrollView } from "react-native";
+import { View, Image } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text } from "react-native-paper";
 
