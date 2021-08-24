@@ -24,6 +24,7 @@ const BookListScreen = () => {
   const { fetchData, response, loading, error } = useFetch();
 
   const handleSearch = async () => {
+    setSearchText("");
     await fetchData(`books/v1/volumes?q=${searchText}`);
   };
 
