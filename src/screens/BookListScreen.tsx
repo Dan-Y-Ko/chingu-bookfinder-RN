@@ -14,6 +14,10 @@ const SearchBarStyled = styled(Searchbar)`
   margin: 10px;
 `;
 
+const ResultsTextWrapper = styled(View)`
+  align-items: center;
+`;
+
 const BookListScreen = () => {
   const [searchText, setSearchText] = useState("");
 
@@ -52,7 +56,11 @@ const BookListScreen = () => {
       />
       {loading && <Text>Loading....</Text>}
       {/* {error && <Error />} */}
-
+      {!error && !loading && !response && (
+        <ResultsTextWrapper>
+          <Text>No Results Found</Text>
+        </ResultsTextWrapper>
+      )}
       {!error && !loading && response && (
         <FlatList
           data={response}
