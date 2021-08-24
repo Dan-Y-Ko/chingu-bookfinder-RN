@@ -79,6 +79,7 @@ const Book = ({ image, title, author, publisher, description }: BookProps) => {
               mode="contained"
               onPress={() =>
                 navigation.navigate("BookDetail", {
+                  title,
                   image,
                   author,
                   publisher,

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { View, Image } from "react-native";
+import { View, Image, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Text } from "react-native-paper";
 
@@ -13,7 +13,7 @@ type BookDetailScreenRouteProp = NativeStackScreenProps<
 
 const ImageStyled = styled(Image)`
   width: 100%;
-  height: 50%;
+  height: 400px;
 `;
 
 const BookDetailWrapper = styled(View)`
@@ -40,12 +40,14 @@ const BookDetailScreen = ({ route }: BookDetailScreenRouteProp) => {
 
   return (
     <>
-      <ImageStyled source={{ uri: image }} resizeMode="stretch" />
-      <BookDetailWrapper>
-        <AuthorText>{author}</AuthorText>
-        <PublisherText>{publisher}</PublisherText>
-        <DescriptionText>{description}</DescriptionText>
-      </BookDetailWrapper>
+      <ScrollView>
+        <ImageStyled source={{ uri: image }} resizeMode="stretch" />
+        <BookDetailWrapper>
+          <AuthorText>{author}</AuthorText>
+          <PublisherText>{publisher}</PublisherText>
+          <DescriptionText>{description}</DescriptionText>
+        </BookDetailWrapper>
+      </ScrollView>
     </>
   );
 };

@@ -8,6 +8,7 @@ import BookDetailScreen from "./screens/BookDetailScreen";
 export type BookListStackParamList = {
   Home: undefined;
   BookDetail: {
+    title: string;
     image: string;
     author: string;
     publisher: string;
@@ -38,10 +39,11 @@ const BookListNavigator = (): JSX.Element => (
     <BookListStack.Screen
       name="BookDetail"
       component={BookDetailScreen}
-      options={{
+      options={({ route }) => ({
+        title: route.params.title,
         gestureEnabled: false,
         animation: "fade",
-      }}
+      })}
     />
   </BookListStack.Navigator>
 );
