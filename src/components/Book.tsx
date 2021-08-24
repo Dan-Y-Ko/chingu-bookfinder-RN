@@ -1,6 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Card, Image, Text, Button } from "react-native-elements";
+import { View, StyleSheet, Image } from "react-native";
+import { Card, Text, Button } from "react-native-paper";
 
 interface BookProps {
   image: string;
@@ -10,17 +10,29 @@ interface BookProps {
 }
 
 const Book = ({ image, title, author, publisher }: BookProps) => (
-  <Card containerStyle={styles.cardContainer}>
-    <View style={styles.bookRowWrapper}>
-      <Image source={{ uri: image }} style={styles.image} resizeMode="cover" />
-      <View style={styles.descriptionColumnWrapper}>
-        <Text style={styles.title}>{title}</Text>
-        <Text>By: {author}</Text>
-        <Text>Published By: {publisher}</Text>
-        <Button buttonStyle={styles.button} title="View Details" />
+  <View style={{ alignItems: "center", marginTop: 10, marginBottom: 10 }}>
+    <Card style={styles.cardContainer}>
+      <View style={styles.bookRowWrapper}>
+        <Image
+          source={{ uri: image }}
+          style={styles.image}
+          resizeMode="cover"
+        />
+        <View style={styles.descriptionColumnWrapper}>
+          <Text style={styles.title}>{title}</Text>
+          <Text>By: {author}</Text>
+          <Text>Published By: {publisher}</Text>
+          <Button
+            style={styles.button}
+            labelStyle={{ fontSize: 12 }}
+            mode="contained"
+          >
+            View Details
+          </Button>
+        </View>
       </View>
-    </View>
-  </Card>
+    </Card>
+  </View>
 );
 
 const styles = StyleSheet.create({
@@ -46,9 +58,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   button: {
-    width: 120,
+    width: 150,
     height: 40,
     marginTop: 10,
+    justifyContent: "center",
   },
 });
 
