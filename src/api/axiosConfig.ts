@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_URL } from "@env";
 
 const instance = axios.create({
-  baseURL: `https://www.googleapis.com/`,
+  baseURL: `${API_URL}`,
 });
 
 export default instance;
