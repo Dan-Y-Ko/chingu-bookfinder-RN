@@ -15,12 +15,6 @@ const RootStack = (): JSX.Element => (
   </NavigationContainer>
 );
 
-// const forFade = ({ current }) => ({
-//   cardStyle: {
-//     opacity: current.progress,
-//   },
-// });
-
 const BookListStack = createNativeStackNavigator<BookListStackParamList>();
 
 const BookListNavigator = (): JSX.Element => (
@@ -28,7 +22,11 @@ const BookListNavigator = (): JSX.Element => (
     <BookListStack.Screen
       name="Home"
       component={BookListScreen}
-      // options={{ gestureEnabled: false, cardStyleInterpolator: forFade }}
+      options={{
+        headerShown: false,
+        gestureEnabled: false,
+        animation: "fade",
+      }}
     />
     {/* <BookListStack.Screen
       name="BookDetail"
