@@ -1,5 +1,6 @@
 import React from "react";
-import { View, StyleSheet, Image } from "react-native";
+import styled from "styled-components/native";
+import { View, Image } from "react-native";
 import { Card, Text, Button } from "react-native-paper";
 
 interface BookProps {
@@ -9,60 +10,63 @@ interface BookProps {
   publisher: string;
 }
 
-const Book = ({ image, title, author, publisher }: BookProps) => (
-  <View style={{ alignItems: "center", marginTop: 10, marginBottom: 10 }}>
-    <Card style={styles.cardContainer}>
-      <View style={styles.bookRowWrapper}>
-        <Image
-          source={{ uri: image }}
-          style={styles.image}
-          resizeMode="cover"
-        />
-        <View style={styles.descriptionColumnWrapper}>
-          <Text style={styles.title}>{title}</Text>
-          <Text>By: {author}</Text>
-          <Text>Published By: {publisher}</Text>
-          <Button
-            style={styles.button}
-            labelStyle={{ fontSize: 12 }}
-            mode="contained"
-          >
-            View Details
-          </Button>
-        </View>
-      </View>
-    </Card>
-  </View>
-);
+const CardParent = styled(View)`
+  align-items: center;
+`;
 
-const styles = StyleSheet.create({
-  cardContainer: {
-    width: "90%",
+const CardContainer = styled(Card)`
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 90%;
+`;
+
+const BookRowWrapper = styled(View)`
+  flex-direction: row;
+`;
+
+const ImageStyled = styled(Image)`
+  width: 150px;
+  height: 200px;
+`;
+
+const DescriptionColumnWrapper = styled(View)`
+  width: 55%;
+  flex-wrap: wrap;
+  margin-left: 5px;
+  align-items: flex-start;
+  justify-content: center;
+`;
+
+const TitleText = styled(Text)`
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+const ButtonText = styled(Button).attrs({
+  labelStyle: {
+    fontSize: 12,
   },
-  bookRowWrapper: {
-    flexDirection: "row",
-  },
-  descriptionColumnWrapper: {
-    width: "55%",
-    flexWrap: "wrap",
-    marginLeft: 5,
-    alignItems: "flex-start",
-    justifyContent: "center",
-  },
-  image: {
-    width: 150,
-    height: 200,
-  },
-  title: {
-    fontSize: 14,
-    fontWeight: "bold",
-  },
-  button: {
-    width: 150,
-    height: 40,
-    marginTop: 10,
-    justifyContent: "center",
-  },
-});
+})`
+  width: 150px;
+  height: 40px;
+  margin-top: 10px;
+  justify-content: center;
+`;
+
+const Book = ({ image, title, author, publisher }: BookProps) => (
+  <CardParent>
+    <CardContainer>
+      <BookRowWrapper>
+        <ImageStyled source={{ uri: image }} resizeMode="cover" />
+        <DescriptionColumnWrapper>
+          <TitleText>{title}</TitleText>
+          <Text>By: {author}</Text>
+          <Text>Published By: {publisher ?? "Unknown"}</Text>
+          <ButtonText mode="contained">View Details</ButtonText>
+        </DescriptionColumnWrapper>
+      </BookRowWrapper>
+    </CardContainer>
+  </CardParent>
+);
 
 export default Book;
