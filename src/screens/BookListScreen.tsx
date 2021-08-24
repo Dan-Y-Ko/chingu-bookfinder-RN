@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import { FlatList, View, Text } from "react-native";
-import { Searchbar } from "react-native-paper";
+import { Searchbar, ActivityIndicator } from "react-native-paper";
 
 import Book from "../components/Book";
 import useFetch from "../hooks/useFetch";
@@ -54,8 +54,12 @@ const BookListScreen = () => {
         value={searchText}
         onSubmitEditing={handleSearch}
       />
-      {loading && <Text>Loading....</Text>}
-      {/* {error && <Error />} */}
+      {loading && <ActivityIndicator animating />}
+      {error && (
+        <ResultsTextWrapper>
+          <Text>Something went wrong, try again</Text>
+        </ResultsTextWrapper>
+      )}
       {!error && !loading && !response && (
         <ResultsTextWrapper>
           <Text>No Results Found</Text>
