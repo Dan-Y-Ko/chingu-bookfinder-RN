@@ -3,9 +3,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import BookListScreen from "./screens/BookListScreen";
+import BookDetailScreen from "./screens/BookDetailScreen";
 
 export type BookListStackParamList = {
   Home: undefined;
+  BookDetail: {
+    image: string;
+    author: string;
+    publisher: string;
+    description: string;
+  };
 };
 
 // create container navigation in case app needs authentication or onboarding before proceeding to main app
@@ -28,11 +35,14 @@ const BookListNavigator = (): JSX.Element => (
         animation: "fade",
       }}
     />
-    {/* <BookListStack.Screen
+    <BookListStack.Screen
       name="BookDetail"
       component={BookDetailScreen}
-      options={{ gestureEnabled: false, cardStyleInterpolator: forFade }}
-    /> */}
+      options={{
+        gestureEnabled: false,
+        animation: "fade",
+      }}
+    />
   </BookListStack.Navigator>
 );
 

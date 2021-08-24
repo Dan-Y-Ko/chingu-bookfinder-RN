@@ -48,6 +48,7 @@ const BookListScreen = () => {
         title={volumeInfo.title}
         author={volumeInfo.authors[0]}
         publisher={volumeInfo.publisher}
+        description={volumeInfo.description}
       />
     );
   };

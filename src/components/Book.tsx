@@ -1,13 +1,23 @@
 import React from "react";
 import styled from "styled-components/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { View, Image } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 import { Card, Text, Button } from "react-native-paper";
+
+import type { BookListStackParamList } from "../navigation";
+
+type BookListScreenNavigationProp = NativeStackNavigationProp<
+  BookListStackParamList,
+  "Home"
+>;
 
 interface BookProps {
   image: string;
   title: string;
   author: string;
   publisher: string;
+  description: string;
 }
 
 const CardParent = styled(View)`
@@ -53,20 +63,36 @@ const ButtonText = styled(Button).attrs({
   justify-content: center;
 `;
 
-const Book = ({ image, title, author, publisher }: BookProps) => (
-  <CardParent>
-    <CardContainer>
-      <BookRowWrapper>
-        <ImageStyled source={{ uri: image }} resizeMode="cover" />
-        <DescriptionColumnWrapper>
-          <TitleText>{title}</TitleText>
-          <Text>By: {author}</Text>
-          <Text>Published By: {publisher ?? "Unknown"}</Text>
-          <ButtonText mode="contained">View Details</ButtonText>
-        </DescriptionColumnWrapper>
-      </BookRowWrapper>
-    </CardContainer>
-  </CardParent>
-);
+const Book = ({ image, title, author, publisher, description }: BookProps) => {
+  const navigation = useNavigation<BookListScreenNavigationProp>();
+
+  return (
+    <CardParent>
+      <CardContainer>
+        <BookRowWrapper>
+          <ImageStyled source={{ uri: image }} resizeMode="cover" />
+          <DescriptionColumnWrapper>
+            <TitleText>{title}</TitleText>
+            <Text>By: {author}</Text>
+            <Text>Published By: {publisher ?? "Unknown"}</Text>
+            <ButtonText
+              mode="contained"
+              onPress={() =>
+                navigation.navigate("BookDetail", {
+                  image,
+                  author,
+                  publisher,
+                  description,
+                })
+              }
+            >
+              View Details
+            </ButtonText>
+          </DescriptionColumnWrapper>
+        </BookRowWrapper>
+      </CardContainer>
+    </CardParent>
+  );
+};
 
 export default Book;
