@@ -6,6 +6,21 @@ import { Searchbar, ActivityIndicator } from "react-native-paper";
 import Book from "../components/Book";
 import useFetch from "../hooks/useFetch";
 
+export interface RenderBookProps {
+  item: {
+    id: string;
+    volumeInfo: {
+      authors: string[];
+      description: string;
+      imageLinks: {
+        thumbnail: string;
+      };
+      publisher: string;
+      title: string;
+    };
+  };
+}
+
 const BookListViewContainer = styled(View)`
   margin-bottom: 70px;
 `;
@@ -37,7 +52,7 @@ const BookListScreen = () => {
     setSearchText(text);
   };
 
-  const renderBook = ({ item: { volumeInfo } }: any) => {
+  const renderBook = ({ item: { volumeInfo } }: RenderBookProps) => {
     if (!volumeInfo.imageLinks || !volumeInfo.authors) {
       return null;
     }
