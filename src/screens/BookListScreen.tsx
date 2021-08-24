@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { View } from "react-native";
+import { FlatList, View } from "react-native";
 import { Text } from "react-native-elements";
 
 const BookListScreen = () => {
@@ -12,7 +12,7 @@ const BookListScreen = () => {
         "https://www.googleapis.com/books/v1/volumes?q=pendragon"
       );
 
-      setBooks(result.data);
+      setBooks(result.data.items);
     };
 
     fetchData();
@@ -20,9 +20,16 @@ const BookListScreen = () => {
 
   console.log(books);
 
+  const renderBook = ({ item }: any) => <Text>{item.id}</Text>;
+
   return (
     <View>
-      <Text h1>{books?.title}</Text>
+      <Text>{books[1].id}</Text>
+      <FlatList
+        data={books}
+        renderItem={renderBook}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 };
