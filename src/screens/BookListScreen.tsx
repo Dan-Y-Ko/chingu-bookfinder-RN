@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { FlatList, View } from "react-native";
-import { Text } from "react-native-elements";
+
+import Book from "../components/Book";
 
 const BookListScreen = () => {
   const [books, setBooks] = useState<any>([]);
@@ -18,13 +19,17 @@ const BookListScreen = () => {
     fetchData();
   }, []);
 
-  console.log(books);
-
-  const renderBook = ({ item }: any) => <Text>{item.id}</Text>;
+  const renderBook = ({ item }: any) => (
+    <Book
+      image={item.volumeInfo.imageLinks.thumbnail}
+      title={item.volumeInfo.title}
+      author={item.volumeInfo.authors[0]}
+      publisher={item.volumeInfo.publisher}
+    />
+  );
 
   return (
     <View>
-      <Text>{books[1].id}</Text>
       <FlatList
         data={books}
         renderItem={renderBook}
