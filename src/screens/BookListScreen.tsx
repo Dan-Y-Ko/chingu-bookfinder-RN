@@ -33,12 +33,12 @@ const ResultsTextWrapper = styled(View)`
   align-items: center;
 `;
 
-const BookListScreen = () => {
+const BookListScreen = (): JSX.Element => {
   const [searchText, setSearchText] = useState("");
 
   const { fetchData, response, loading, error } = useFetch();
 
-  const handleSearch = async () => {
+  const handleSearch = async (): Promise<void> => {
     if (searchText === "") {
       await fetchData(`books/v1/volumes?q=""`);
     } else {
@@ -48,11 +48,13 @@ const BookListScreen = () => {
     setSearchText("");
   };
 
-  const updateSearch = (text: string) => {
+  const updateSearch = (text: string): void => {
     setSearchText(text);
   };
 
-  const renderBook = ({ item: { volumeInfo } }: RenderBookProps) => {
+  const renderBook = ({
+    item: { volumeInfo },
+  }: RenderBookProps): JSX.Element | null => {
     if (!volumeInfo.imageLinks || !volumeInfo.authors) {
       return null;
     }

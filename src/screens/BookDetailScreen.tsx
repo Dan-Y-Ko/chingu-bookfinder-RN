@@ -35,7 +35,9 @@ const DescriptionText = styled(Text)`
   margin: 20px;
 `;
 
-const BookDetailScreen = ({ route }: BookDetailScreenRouteProp) => {
+const BookDetailScreen = ({
+  route,
+}: BookDetailScreenRouteProp): JSX.Element => {
   const { image, author, publisher, description } = route.params;
 
   return (

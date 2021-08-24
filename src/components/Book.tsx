@@ -63,7 +63,13 @@ const ButtonText = styled(Button).attrs({
   justify-content: center;
 `;
 
-const Book = ({ image, title, author, publisher, description }: BookProps) => {
+const Book = ({
+  image,
+  title,
+  author,
+  publisher,
+  description,
+}: BookProps): JSX.Element => {
   const navigation = useNavigation<BookListScreenNavigationProp>();
 
   return (

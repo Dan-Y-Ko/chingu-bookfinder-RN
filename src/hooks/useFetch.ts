@@ -7,7 +7,7 @@ const useFetch = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const fetchData = async (url: string) => {
+  const fetchData = async (url: string): Promise<void> => {
     try {
       setLoading(true);
       setError(null);
